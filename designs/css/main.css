@@ -8,9 +8,6 @@ html {
 
 body {
   margin: 0;
-}
-
-#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -57,12 +54,6 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.main-nav-item-icon {
-  margin-right: 4px;
 }
 
 .main-nav-item:hover {
@@ -80,7 +71,7 @@ body {
 }
 
 .hero {
-  background-image: url("assets/img/bank-tree.jpeg");
+  background-image: url('../img/bank-tree.jpeg');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
