@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import SigninForm from "../components/SigninForm";
+import Form from "../components/Form";
 import { FaUserCircle } from "react-icons/fa";
 
 export default function SignIn() {
@@ -12,7 +12,7 @@ export default function SignIn() {
         <section className="sign-in-content">
           <FaUserCircle className="sign-in-icon" />
           <h1>Sign In</h1>
-          <SigninForm />
+          <Form />
         </section>
       </main>
       <Footer />
