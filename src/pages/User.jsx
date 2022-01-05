@@ -3,8 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-// import { ActionCreators } from "../store/auth/actionCreators";
-import actions from "../store/auth/actions";
+import actions from "../store/projects/actions";
 
 export default function User() {
   const token = useSelector((state) => state.token);
@@ -21,7 +20,6 @@ export default function User() {
         },
       });
       console.log(data);
-      // dispatch(ActionCreators.updateProfile(data.body));
       dispatch(actions.updatedProfile(data.body));
     };
 

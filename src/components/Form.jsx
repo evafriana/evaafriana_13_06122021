@@ -3,8 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-// import { ActionCreators } from "../store/auth/actionCreators";
-import actions from "../store/auth/actions";
+import actions from "../store/projects/actions";
 
 export default function Form() {
   const [userName, setUserName] = useState("");
@@ -44,7 +43,6 @@ export default function Form() {
       data: { email: userName, password: userPassword },
     });
 
-    // dispatch(ActionCreators.login(data.body.token));
     dispatch(actions.loggedIn(data.body.token));
   };
 
