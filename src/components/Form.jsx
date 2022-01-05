@@ -3,7 +3,8 @@ import { Navigate } from "react-router-dom";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { ActionCreators } from "../store/actionCreators";
+// import { ActionCreators } from "../store/auth/actionCreators";
+import actions from "../store/auth/actions";
 
 export default function Form() {
   const [userName, setUserName] = useState("");
@@ -11,7 +12,8 @@ export default function Form() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
+  const state = useSelector((state) => state);
+  const { token } = state;
 
   useEffect(() => {
     const storedRememberMe = localStorage.getItem("rememberMe") === "true";
@@ -42,7 +44,8 @@ export default function Form() {
       data: { email: userName, password: userPassword },
     });
 
-    dispatch(ActionCreators.login(data.body.token));
+    // dispatch(ActionCreators.login(data.body.token));
+    dispatch(actions.loggedIn(data.body.token));
   };
 
   const handleRememberMe = (e) => {
