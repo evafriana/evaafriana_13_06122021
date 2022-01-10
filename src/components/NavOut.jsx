@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import actions from "../store/projects/actions";
+import actions from "../store/actions";
 
 export default function NavOut() {
   const { firstName } = useSelector((state) => state.user);
@@ -13,13 +13,13 @@ export default function NavOut() {
   };
 
   return (
-    <div>
+    <div className="main-nav">
       <Link className="main-nav-item" to="/user">
-        <FaUserCircle />
+        <FaUserCircle className="main-nav-item-icon" />
         {firstName}
       </Link>
       <Link onClick={handleLogOut} className="main-nav-item" to="/">
-        <FaSignOutAlt />
+        <FaSignOutAlt className="main-nav-item-icon" />
         Sign Out
       </Link>
     </div>

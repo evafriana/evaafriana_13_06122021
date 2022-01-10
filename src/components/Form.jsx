@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import actions from "../store/projects/actions";
+import actions from "../store/actions";
+import API from "../api/Api";
 
 export default function Form() {
   const [userName, setUserName] = useState("");
@@ -11,6 +10,7 @@ export default function Form() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch();
+
   const state = useSelector((state) => state);
   const { token } = state;
 
@@ -37,10 +37,9 @@ export default function Form() {
     e.preventDefault();
     handleDataStorage();
 
-    const { data } = await axios({
-      method: "post",
-      url: "http://localhost:3001/api/v1/user/login",
-      data: { email: userName, password: userPassword },
+    const { data } = await new API({}).logIn({
+      email: userName,
+      password: userPassword,
     });
 
     dispatch(actions.loggedIn(data.body.token));
