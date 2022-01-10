@@ -13,8 +13,8 @@ export default function NavOut() {
   };
 
   return (
-    <div className="main-nav">
-      <Link className="main-nav-item" to="/user">
+    <div className="main-nav-profile">
+      <Link className="main-nav-item first-name" to="/user">
         <FaUserCircle className="main-nav-item-icon" />
         {firstName}
       </Link>
