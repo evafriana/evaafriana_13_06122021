@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../store/actions";
-import API from "../api/Api";
+import UserAPI from "../api/User";
 
 export default function Form() {
   const [userName, setUserName] = useState("");
@@ -37,7 +37,7 @@ export default function Form() {
     e.preventDefault();
     handleDataStorage();
 
-    const { data } = await new API({}).logIn({
+    const { data } = await new UserAPI({}).logIn({
       email: userName,
       password: userPassword,
     });

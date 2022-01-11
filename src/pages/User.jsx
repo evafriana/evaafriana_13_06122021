@@ -3,7 +3,29 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../store/actions";
-import API from "../api/Api";
+import UserAPI from "../api/User";
+import Account from "../components/Account";
+
+const accounts = [
+  {
+    id: 1,
+    title: "Argent Bank Checking (x8349)",
+    amount: "2,082.79",
+    description: "Available Balance",
+  },
+  {
+    id: 2,
+    title: "Argent Bank Savings (x6712)",
+    amount: "10,928.42",
+    description: "Available Balance",
+  },
+  {
+    id: 3,
+    title: "Argent Bank Credit Card (x8349)",
+    amount: "184.30",
+    description: "Current Balance",
+  },
+];
 
 export default function User() {
   const token = useSelector((state) => state.token);
@@ -18,7 +40,7 @@ export default function User() {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data } = await new API({ token }).getUserProfile();
+      const { data } = await new UserAPI({ token }).getProfile();
       dispatch(actions.updatedProfile(data.body));
     };
 
@@ -44,7 +66,7 @@ export default function User() {
   };
 
   const handleUpdateUserProfile = async () => {
-    const { data } = await new API({ token }).updateUserProfile({
+    const { data } = await new UserAPI({ token }).updateProfile({
       firstName: editedFirstName,
       lastName: editedLastName,
     });
@@ -62,6 +84,7 @@ export default function User() {
               Welcome back
               <br />
               <input
+                className="mr"
                 type="text"
                 id="firstName"
                 autoComplete={"firstName"}
@@ -69,6 +92,7 @@ export default function User() {
                 onChange={handleFirstName}
               />
               <input
+                className="ml"
                 type="text"
                 id="lastName"
                 autoComplete={"lastName"}
@@ -76,10 +100,13 @@ export default function User() {
                 onChange={handleLastName}
               />
             </h1>
-            <button onClick={handleUpdateUserProfile} className="edit-button">
+            <button
+              onClick={handleUpdateUserProfile}
+              className="edit-button mr"
+            >
               Save
             </button>
-            <button onClick={handleCancelProfile} className="edit-button">
+            <button onClick={handleCancelProfile} className="edit-button ml">
               Cancel
             </button>
           </div>
@@ -96,36 +123,16 @@ export default function User() {
           </div>
         )}
         <h2 className="sr-only">Accounts</h2>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-            <p className="account-amount">$10,928.42</p>
-            <p className="account-amount-description">Available Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-            <p className="account-amount">$184.30</p>
-            <p className="account-amount-description">Current Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
+        {accounts.map(({ title, amount, description, id }) => {
+          return (
+            <Account
+              key={id}
+              title={title}
+              amount={amount}
+              description={description}
+            />
+          );
+        })}
       </main>
       <Footer />
     </>
