@@ -77,59 +77,6 @@ class User {
       },
     });
   }
-
-  /**
-   *
-   * Get transactions from account selected
-   * @returns {Object}
-   */
-  async getAccountTransactions({ accountId }) {
-    return await axios({
-      method: "post",
-      url: this.baseURL + "/account/" + accountId,
-      headers: {
-        Authorization: "Bearer " + this.token,
-      },
-    });
-  }
-
-  /**
-   *
-   * Get details of transaction
-   * @param {string} transactionId
-   * @returns {Object}
-   */
-  async getTransaction({ transactionId }) {
-    return await axios({
-      method: "post",
-      url: this.baseURL + "/transaction/" + transactionId,
-      headers: {
-        Authorization: "Bearer " + this.token,
-      },
-    });
-  }
-
-  /**
-   *
-   * Update transaction
-   * @param {string} transactionId
-   * @param {string} category
-   * @param {string} notes
-   * @returns {Object}
-   */
-  async updateTransaction({ transactionId, category, notes }) {
-    return await axios({
-      method: "put",
-      url: this.baseURL + "/transaction/" + transactionId,
-      data: {
-        category,
-        notes,
-      },
-      headers: {
-        Authorization: "Bearer " + this.token,
-      },
-    });
-  }
 }
 
 export default User;
